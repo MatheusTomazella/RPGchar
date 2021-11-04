@@ -1,0 +1,496 @@
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <!-- Quill -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+</head>
+
+<style>
+    .title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0.5rem;
+    }
+    .text-left {
+        text-align: left;
+    }
+    p {
+        padding-left: 2rem;
+    }
+    h1 {
+        font-size: 1.3rem !important;
+        letter-spacing: 0.5rem !important;
+        text-transform: uppercase !important;
+        margin: 0.5rem 0 1rem 0 !important;
+        font-weight: 500 !important;
+        font-family: 'Zen Kurenaido', sans-serif;
+    }
+    div.p-bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        text-align: center;
+        margin: 0;
+    }
+    div.p-bar > h1 {
+        text-align: center;
+    }
+    div.p-bar > p {
+        padding: 0;
+    }
+    div.p-bar > div {
+        height: 2px;
+        background-color: rgb(240, 240, 240);
+        width: 80%;
+    }
+    div.p-bar > div > div {
+        height: 100%;
+        background-color: #69f0ae;
+        width: 50%;
+    }
+    h1.sub {
+        color: lightgray;
+        border-top: 1px solid lightgray;
+        width: 60%;
+        text-align: center;
+        text-transform: lowercase;
+        font-size: 0.8rem !important;
+    }
+    section.sheet-tab {
+    }
+    p {
+        padding: 0 !important;
+        margin: 0;
+    }
+    input.title {
+        font-size: 1.1rem;
+        font-weight: 400;
+        margin: 0rem !important;
+        letter-spacing: 0.25rem !important;
+        text-align: center;
+    }
+    .text-center {
+        text-align: center;
+    }
+    input.sheet {
+        width: min-content !important;
+        border: 0 !important;
+        text-align: center;
+        height: min-content !important;
+        padding: 0.25rem !important;
+    }
+    input.sheet[type="number"] {
+        width: 10ch !important;
+    }
+    input.sheet:focus {
+        border: 0 !important;
+        box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+    }
+    div.stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        margin: 1rem;
+        border: 1px solid lightgray;
+        border-radius: 0.5rem;
+    }
+    div.stat > h1 {
+        text-align: center;
+    }
+    div.stat > input {
+        width: 5rem !important;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    #sheet input.search:focus {
+        border-color: #69f0ae !important;
+        box-shadow: 0 1px 0 0 #69f0ae !important;
+        -ws-box-shadow: 0 1px 0 0 #69f0ae !important;
+    }
+    li.experts {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.5rem;
+        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+        border: 1px solid lightgray;
+        border-radius: 0.5rem;
+        width: 80%;
+    }
+    li.experts > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+    }
+    li.experts > div > h1 {
+        font-size: 1.1rem !important;
+        margin: 0 !important;
+    }
+    li.experts input {
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-align: center;
+        margin: 0;
+        width: 5rem !important;
+    }
+    div.text-field {
+        padding: 1rem 5rem 2rem 5rem;
+        height: calc(100vh - 12rem);
+    }
+    div.windowsTitleBar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0 0.5rem 1rem;
+        width: 100%;
+    }
+    div.windowsTitleBar > div {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        align-items: center;
+    }
+    div.windowsTitleBar > div > h1 {
+        font-size: 1rem !important;
+        margin: 0 !important;
+        letter-spacing: 0.1rem;
+    }
+    div.windowsTitleBar > div > img {
+        height: 2rem;
+        margin-right: 1rem;
+    }
+    div.windowsTitleBar > div > i {
+        font-size: 1rem !important;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        height: 100%;
+        user-select: none;
+    }
+    div.windowsTitleBar > div > i:hover {
+        cursor: pointer;
+        background-color: rgb(241, 241, 241);
+    }
+    div.windowsTitleBar > div > i.red:hover {
+        background-color: rgb(255, 162, 162) !important;
+    }
+    div.ql-editor h1 {
+        font-size: 1.5rem !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        font-family: initial !important;
+        letter-spacing: 0.1rem;
+    }
+    div.ql-editor h2 {
+        font-size: 1.3rem !important;
+        font-weight: 300 !important;
+        margin: 0 !important;
+        font-family: initial !important;
+        letter-spacing: 0.1rem;
+    }
+    div.ql-editor strong {
+        font-weight: bolder !important;
+    }
+</style>
+
+<div class="row" style="position: fixed;bottom: 0; left: 0;width: calc(100% - 34rem); box-shadow: -3px 1px 4px grey;">
+    <ul class="tabs row space-around" style="overflow: auto;">
+        <li class="tab"><a class="teal-text text-accent-3 active" href="#stats">Status</a></li>
+        <li class="tab"><a class="deep-orange-text text-lighten-1" href="#powers-tab">Habilidades</a></li>
+        <li class="tab"><a class="pink-text text-lighten-4" href="#inventory-tab">Inventário</a></li>
+        <li class="tab"><a class="deep-purple-text text-accent-1" href="#personality-tab">Personalidade</a></li>
+    </ul>
+</div>
+
+<div class="column w100">
+    
+    <section id="stats" class="sheet-tab" style="padding-bottom: 5rem;">
+
+        <div class="row align-center w100">
+            <div class="w50 column align-center center">                
+                <img style="height: 30vh;" id="char_pic" src="https://southernautomotivegroup.com.au/wp-content/uploads/2015/04/generic-placeholder-person.png" onclick="toggleUrlInput()">
+                <input class="w100" id="char_pic_url" style="display: none;" type="url" value="https://southernautomotivegroup.com.au/wp-content/uploads/2015/04/generic-placeholder-person.png">
+            </div>
+            <div class="column text-center center align-center w50">
+                <input class="sheet title" id="char_name" value="[char_name]">
+                <h1 class="sub">Nome</h1>
+                <input class="sheet title" id="char_class" value="[char_class]">
+                <h1 class="sub">Classe</h1>
+                <input class="sheet title" id="lvl" value="1">
+                <h1 class="sub">Nível</h1>
+            </div>
+        </div>
+        
+        <div class="column w100 my-3">
+            <div class="p-bar">
+                <h1>vida</h1>
+                <div><div id="hp_bar"></div></div>
+                <p> <input class="sheet" type="number" id="hp_atual" value="0" oninput="updatePercentageBars()"> / <input class="sheet" type="number" id="hp_total" value="0" oninput="updatePercentageBars()"> </p>
+            </div>
+            <div class="p-bar">
+                <h1>PE</h1>
+                <div><div class="indigo lighten-3" id="pe_bar"></div></div>
+                <p> <input class="sheet" type="number" id="pe_atual" value="0" oninput="updatePercentageBars()"> / <input class="sheet" type="number" id="pe_total" value="0" oninput="updatePercentageBars()"> </p>
+            </div>
+        </div>
+
+        <div class="column center align-center w100 my-1">
+            <div class="row align-center w100 space-around mb-1">
+                <div class="stat">
+                    <h1>FOR</h1>
+                    <input class="sheet" id="for" value="0">
+                </div>
+                <div class="stat">
+                    <h1>INT</h1>
+                    <input class="sheet" id="int" value="0">
+                </div>
+                <div class="stat">
+                    <h1>DES</h1>
+                    <input class="sheet" id="des" value="0">
+                </div>
+                <div class="stat">
+                    <h1>CON</h1>
+                    <input class="sheet" id="con" value="0">
+                </div>
+            </div>
+            <div class="row align-center w100 space-around mb-1">
+                <div class="stat">
+                    <h1>PRE</h1>
+                    <input class="sheet" id="pre" value="0">
+                </div>
+                <div class="stat">
+                    <h1>MOV</h1>
+                    <input class="sheet" id="mov" value="9">
+                </div>
+                <div class="stat">
+                    <h1>TAM</h1>
+                    <input class="sheet" id="tam" value="0">
+                </div>
+                <div class="stat">
+                    <h1>AMR</h1>
+                    <input class="sheet" id="arm" value="0">
+                </div>
+            </div>
+            <div class="row align-center w100 center mb-1">
+                <div class="stat" style="margin-right: 4.5rem;">
+                    <h1>AMQ</h1>
+                    <input class="sheet" id="arq" value="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="row w100 center align-center">
+            <div class="column align-center my-3 w100" id="experts">
+                <input type="search" class="search mb-2" style="padding-left: 10rem;" placeholder="Pesquisar...">
+                <ul class="list w100 column center align-center">
+                    <!-- Expertises -->
+                </ul>
+            </div>
+        </div>
+        
+    </section>
+
+    <section id="powers-tab" class="sheet-tab column">
+        <div class="windowsTitleBar">
+            <div>
+                <img src="./anfitras.png">
+                <h1>Habilidades.txt</h1>
+            </div>
+            <div>
+                <i class="small material-icons">remove</i>
+                <i class="small material-icons">crop_square</i>
+                <i class="small material-icons red accent-1 white-text">close</i>
+            </div>
+        </div>
+        <div class="w100 text-field" id="powers">
+        </div>
+    </section>
+
+    <section id="inventory-tab" class="sheet-tab">
+        <div class="windowsTitleBar">
+            <div>
+                <img src="./anfitras.png">
+                <h1>Inventário.txt</h1>
+            </div>
+            <div>
+                <i class="small material-icons">remove</i>
+                <i class="small material-icons">crop_square</i>
+                <i class="small material-icons red accent-1 white-text">close</i>
+            </div>
+        </div>
+        <div class="w100 text-field" id="inventory">
+        </div>
+    </section>
+
+    <section id="personality-tab" class="sheet-tab">
+        <div class="windowsTitleBar">
+            <div>
+                <img src="./anfitras.png">
+                <h1>Personalidade.txt</h1>
+            </div>
+            <div>
+                <i class="small material-icons">remove</i>
+                <i class="small material-icons">crop_square</i>
+                <i class="small material-icons red accent-1 white-text">close</i>
+            </div>
+        </div>
+        <div class="w100 text-field" id="personality">
+        </div>
+    </section>
+
+</div>
+
+<script> 
+    let experts;
+    let powersQuill;
+    let inventoryQuill;
+    let personalityQuill;
+
+    function initSheet ( ) {
+        experts = new List('experts', {
+            valueNames: [
+                'name', 
+                { attr: "id", name: "name" },
+                { attr: "value", name: 'value' },
+                { attr: "title", name: 'tip' }
+            ],
+            item: values => {
+                    return `<li class="experts">
+                        <div>
+                            <h1 class="name tooltip" title="${values.id}">${values.name}</h1>
+                            <input class="sheet value" value="${values.value}" oninput="experts.get('id', '${values.id}')[0].values({value: this.value})">
+                        </div>
+                        <i class="material-icons tooltip tip" title="${values.tip}">help_outline</i>
+                    </li>`
+                }
+            }, 
+        templateData.data.expertises );
+
+        $('.tabs').tabs();
+        $('.tooltip').tooltipster();
+
+        powersQuill = new Quill('#powers', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline', {color: []}, {background: []}],
+                    ['size'],
+                    [{'size': ['small', false, 'large', 'huge']}, {'align': [false,'right','center','justify']}],
+                     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['clean']
+                ]
+            }
+        } );
+        inventoryQuill = new Quill('#inventory', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline', {color: []}, {background: []}],
+                    ['size'],
+                    [{'size': ['small', false, 'large', 'huge']}, {'align': [false,'right','center','justify']}],
+                     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['clean']
+                ]
+            }
+        } );
+        personalityQuill = new Quill('#personality', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline', {color: []}, {background: []}],
+                    ['size'],
+                    [{'size': ['small', false, 'large', 'huge']}, {'align': [false,'right','center','justify']}],
+                     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['clean']
+                ]
+            }
+        } );
+
+        /* Populate */
+        document.getElementById("char_name").value = charData.data.name;
+        document.getElementById("char_class").value = charData.data.class;
+        document.getElementById("lvl").value = charData.data.level;
+        document.getElementById("hp_atual").value = charData.data.hp.current;
+        document.getElementById("hp_total").value = charData.data.hp.max;
+        document.getElementById("pe_atual").value = charData.data.pe.current;
+        document.getElementById("pe_total").value = charData.data.pe.max;
+        updatePercentageBars();
+        charData.data.attributes.forEach( attribute => {
+            if ( !attribute.value ) return;
+            document.getElementById(attribute.id).value = attribute.value;
+        });
+        updateExpertValues( charData.data.expertises );
+        document.getElementById('char_pic').src = charData.data.pic_url;
+        document.getElementById('char_pic_url').value = charData.data.pic_url;
+        powersQuill.setContents( charData.data.powers );
+        inventoryQuill.setContents( charData.data.inventory );
+        personalityQuill.setContents( charData.data.personality );
+    }
+
+    function toggleUrlInput ( ) {
+        let input = document.getElementById('char_pic_url');
+        input.style.display = (input.style.display == 'none')?'block':'none';
+    }
+    function updateExpertValues ( expertValues ) {
+        expertValues.forEach( expert => {
+            experts.get('id', expert.id)[0].values({value: expert.value});
+        } )
+    }
+    function updatePercentageBars ( ) {
+        let hp = getStat('hp_atual');
+        let hp_total = getStat('hp_total');
+        let pe = getStat('pe_atual');
+        let pe_total = getStat('pe_total');
+        let hp_percent = (hp / hp_total) * 100;
+        let pe_percent = (pe / pe_total) * 100;
+        document.getElementById('hp_bar').style.width = (hp_percent > 100) ? 100 : (hp_percent < 0 || !hp_percent || hp_percent == NaN) ? 0 : hp_percent + '%';
+        document.getElementById('pe_bar').style.width = (pe_percent > 100) ? 100 : (pe_percent < 0 || !pe_percent || pe_percent == NaN) ? 0 : pe_percent + '%'; + '%';
+    }
+    /**
+     * @description Necessária para o funcionamento da aplicação. Deve retornar o valor numérico do atributo pedido.
+     */
+    function getStat ( id ) {
+        let element = document.getElementById(id);
+        if ( element && element.value ) return element.value;
+
+        element = experts.get( "id", id );
+        if ( element[0] 
+            && element[0]._values 
+            && element[0]._values.value != undefined ) return element[0]._values.value;
+
+        return undefined;
+    }
+    /**
+     * @description Necessária para o funcionamento da aplicação. Deve retornar o objeto contendo os dados do personagem para ser salvo.
+     */
+    function getObjectToSave ( ) {
+        charData.data.expertises.forEach( element => {
+            element.value = getStat(element.id);
+        } );
+        charData.data.attributes.forEach( element => {
+            element.value = getStat(element.id);
+        } );
+        charData.data.powers = powersQuill.getContents();
+        charData.data.inventory = inventoryQuill.getContents();
+        charData.data.personality = personalityQuill.getContents();
+        charData.data.hp = { current: getStat('hp_atual'), max: getStat('hp_total') };
+        charData.data.pe = { current: getStat('pe_atual'), max: getStat('pe_total') };
+        charData.data.pic_url = document.getElementById('char_pic_url').value;
+        charData.data.name = document.getElementById('char_name').value;
+        charData.data.class = document.getElementById('char_class').value;
+        charData.data.level = getStat('lvl');
+        return charData;
+    }
+</script>

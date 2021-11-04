@@ -1,0 +1,183 @@
+div#calc {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+    justify-content: space-between;
+    padding: 1rem;
+}
+section#calc {
+    display: flex;
+    flex-direction: column;
+    width: 14rem;
+}
+.calc-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.calc-btn {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0;
+    border: 0.5px solid gray;
+    background-color: white;
+}
+.calc-btn:hover {
+    background-color: #f0f0f0;
+}
+
+#calc-display {
+    font-size: 1.6rem;
+    padding: 0.2rem;
+    width: 82%;
+    background-color: white;
+    border-radius: 0;
+    border: 0.5px solid gray;
+    text-align: right;
+    margin: 0;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-track{
+    background: transparent;
+}
+::-webkit-scrollbar-thumb{
+    background: rgb(233, 233, 233);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: var(--background-highlight);
+}
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* * {
+    outline: 1px solid #f00 !important;
+} */
+
+.anfitras {
+    background-image: url(./anfitras.png);
+    background-size: cover;
+    animation: anfitras 1s 2 ease-in-out;
+    animation-direction: alternate;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0%;
+}
+@keyframes anfitras {
+    0% {
+        background-size: 0%;
+        filter: drop-shadow(0 0 3rem rgba(226, 8, 135, 0));
+    }
+    50% {
+        filter: drop-shadow(0 0 3rem rgba(226, 8, 135, 0.5));
+        background-size: 88%;
+    }
+    100% {
+        filter: drop-shadow(0 0 3rem rgba(226, 8, 135, 1));
+        background-size: 86%;
+    }
+}
+
+li.skill {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0.5rem;
+    width: 100%;
+}
+li.editable:hover {
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+li.skill > div {
+    display: flex;
+    flex-direction: column;
+}
+li.skill > div > h6 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+li.skill > button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+}
+
+button.edit-skills:hover {
+    background-color: #ffe3db;
+}
+
+.w100 {
+    width: 100%;
+}
+.h100 {
+    height: 100%;
+}
+.h100vh {
+    height: 100vh;
+}
+.m0 {
+    margin: 0;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+.space-between {
+    justify-content: space-between;
+}
+.space-around {
+    justify-content: space-around;
+}
+.space-evenly {
+    justify-content: space-evenly;
+}
+.center {
+    justify-content: center;
+}
+.align-center {
+    align-items: center;
+}
+.w100 {
+    width: 100%;
+}
+.w50 {
+    width: 50%;
+}
+.mb-1 {
+    margin-bottom: 1rem !important;
+}
+.mb-2 {
+    margin-bottom: 2rem !important;
+}
+.my-1 {
+    margin: 1rem 0 1rem 0 !important;
+}
+.my-2 {
+    margin: 2rem 0 2rem 0 !important;
+}
+.my-3 {
+    margin: 3rem 0 3rem 0 !important;
+}
+.mx-1 {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+}

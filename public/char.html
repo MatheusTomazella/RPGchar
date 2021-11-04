@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Ficha</title>
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="dice.css">
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Tooltipster.js -->
+        <link rel="stylesheet" type="text/css" href="lib/tooltipster/dist/css/tooltipster.bundle.min.css">
+        <script src="lib/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+        <!-- Dice Roller -->
+        <script src="https://unpkg.com/mathjs@9.3.2/lib/browser/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/random-js@2.1.0/dist/random-js.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/rpg-dice-roller@5/lib/umd/bundle.min.js"></script>
+        <script> const dice = new rpgDiceRoller.DiceRoller(); </script>
+        <!-- Materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/500b73534a.js" crossorigin="anonymous"></script>
+        <!-- List.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    </head>
+
+    <body style="
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-between;
+    ">
+
+        <div id="skill-modal" class="modal">
+            <div class="modal-content column">
+                <input placeholder="Nome" id="skill-name">
+                <input placeholder="Expressão" id="skill-expr">
+                <!-- <h6>Função para nível de sucesso:</h6>
+                function sucessLevel ( rollResult ) {
+                    <textarea id="skill-func" placeholder="Seu código. Se não aplicável, deixe vazio. Retorne uma string."></textarea>
+                } -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close waves-effect btn-flat red white-text" onclick="deleteSkill(skillToEdit)">Excluir</button>
+                <button class="modal-close waves-effect btn-flat">Fechar</button>
+                <button class="modal-close waves-effect btn-flat" onclick="saveSkill()">Salvar</button>
+            </div>
+        </div>
+        
+        <section id="sheet" style="width: 100%; height: 100vh; overflow-y: auto; padding: 1rem;">
+            <!-- Ficha -->
+        </section>
+
+        <section  id="system" style="
+        width: 35rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        ">
+
+            <div id="calc">
+                <section class="log">
+                    <h5 style="margin: 0 0 1rem 0;"> Log </h5>
+                    <div id="log-content" style="overflow-y: auto; height: 90%; width: 18rem;">
+                        <!-- Logs  -->
+                    </div>
+                </section>
+                <section id="calc">    
+                    <input type="text" id="calc-display" placeholder="0">
+                    <div class="calc-buttons">
+                        <button class="calc-btn waves-effect white waves-green" onclick="clearDisplay()">C</button>
+                        <button class="calc-btn waves-effect white waves-red">d</button>
+                        <button class="calc-btn waves-effect white waves-purple">/</button>
+                        <button class="calc-btn waves-effect white waves-teal" onclick="backspace()"><-</button>
+                        <button class="calc-btn waves-effect white waves-yellow">7</button>
+                        <button class="calc-btn waves-effect white waves-orange">8</button>
+                        <button class="calc-btn waves-effect white waves-green">9</button>
+                        <button class="calc-btn waves-effect white waves-green">*</button>
+                        <button class="calc-btn waves-effect white waves-orange">4</button>
+                        <button class="calc-btn waves-effect white waves-red">5</button>
+                        <button class="calc-btn waves-effect white waves-purple">6</button>
+                        <button class="calc-btn waves-effect white waves-yellow">+</button>
+                        <button class="calc-btn waves-effect white waves-teal">1</button>
+                        <button class="calc-btn waves-effect white waves-purple">2</button>
+                        <button class="calc-btn waves-effect white waves-orange">3</button>
+                        <button class="calc-btn waves-effect white waves-red">-</button>
+                        <button class="calc-btn waves-effect white waves-teal">(</button>
+                        <button class="calc-btn waves-effect white waves-orange">0</button>
+                        <button class="calc-btn waves-effect white waves-purple">)</button>
+                        <button class="calc-btn waves-effect waves-light" style="background-color: rgb(255, 148, 148);" onclick="calculate()"> = </button>
+                    </div>
+                </section>
+            </div>
+
+            <section style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-self: flex-end;
+                width: 100%;
+                height: 50%;
+            ">
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    width: 40%;
+                ">
+                    <div id="anfitras" style="
+                        display: flex; 
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        height: calc(0.4*35rem);
+                        padding: 5rem 0 5rem 0; 
+                        border-radius: 50%;
+                    ">
+                        <ul id="dice" class="d20" style="zoom: 0.4;">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <div style="
+                            display: flex;
+                            flex-direction: row;
+                            position: absolute;
+                            top: calc(50vh + 5rem );
+                            justify-content: center;
+                            right: calc(35rem*0.58);
+                            width: calc(0.4*35rem);
+                            color: white;
+                        ">
+                            <h5 id="dice-result" style="font-weight: 700; text-align:center;">0000</h5>
+                        </div>
+                    </div>
+                    <button class="btn btn-flat cyan waves-effect waves-light" style=" 
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        align-self: center;
+                        width: 3rem;
+                        height: 3rem;
+                        padding: 1rem;
+                        border-radius: 50%;
+                    " onclick="reroll()">
+                        <i class="small material-icons">sync</i>
+                    </button>
+                </div>
+                <div id="skills" style="
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 60%;
+                ">
+                    <input type="search" class="search" id="search" placeholder="Buscar..." autocomplete="off">
+                    <ul id="skills-list" class="list" style="
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        height: 90%;
+                        overflow-y: auto;
+                    ">
+                        <!-- Botão de adicionar definido na função clearSkills -->
+                        <!-- Skills -->
+                    </ul>
+                </div>
+            </section>
+        </section>
+
+        <!-- Scripts -->
+        <script src="calculator.js"></script>
+        <script src="log.js">       </script>
+        <script src="skills.js">    </script>
+        <script src="skillEdit.js"> </script>
+        <script src="index.js">     </script>
+    </body>
+</html>

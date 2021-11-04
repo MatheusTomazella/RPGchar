@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title> Criar Ficha </title>
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="">
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- List.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    </head>
+    <body style="margin: 0; padding: 0;">
+
+        <div id="accept" class="modal">
+            <div class="modal-content">
+                <h4>Criar Ficha</h4>
+                <div class="column align-center" id="accept-confirm">
+                    Deseja criar uma nova ficha com esse template?
+                    <div class="row my-1">
+                        <button class="btn waves-effect waves-light light-green lighten-3 mx-1" onclick="create()">Sim</button>
+                        <button class="btn waves-effect waves-light pink lighten-3 mx-1 modal-close">Não</button>
+                    </div>
+                </div>
+                <div id="accept-created" class="column align-center" style="display: none;">
+                    Ficha criada com sucesso!
+                    
+                    <div class="column w50 red white-text align-center text-center my-1" style="padding: 1rem; text-align: center; border-radius: 0.5rem;">
+                        <i class="medium material-icons">priority_high</i>
+                        SALVE O ID DA FICHA!!!<br>
+                        Essa é a única forma de acessar a ficha.<br> Se o id for perdido, a ficha também será.
+                    </div>
+
+                    <span id="createdId" class="my-1" style="font-size: 1.1rem; font-weight: 500;"></span>
+
+                    <a id="linkSheet">Ir para a ficha</a>
+                </div>
+                <div id="accept-error" style="display: none;">
+                    Falha ao criar ficha.
+                </div> 
+            </div>
+        </div>
+
+        <main class="row w100 h100vh m0">
+            <section class="h100" style="width: 70%;">
+                <iframe src="" id="preview" width="100%" height="100%"></iframe>
+            </section>
+
+            <section class="column h100" id="templates" style="width: 30%; padding: 1rem;">
+                <div class="column w100 red white-text align-center text-center mb-2" style="padding: 1rem; text-align: center; border-radius: 0.5rem;">
+                    <i class="medium material-icons">priority_high</i>
+                    O preview da ficha pode conter erros de formatação e não irá funcionar corretamente. Ele serve apenas para dar uma ideia do conteúdo.
+                </div>
+                <input type="search" class="search" placeholder="Buscar">
+                <ul class="list w100">
+                    <!-- Templates -->
+                </ul>
+            </section>
+        </main>
+
+        <style>
+            li.template {
+                padding: 0.5rem;
+                border-radius: 0.5rem;
+                margin-bottom: 0.5rem;
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            li.template:hover {
+                background-color: #f5f5f5;
+            }
+            li.template h6 {
+                font-weight: 500;
+            }
+            li.template button {
+                background-color: #bbdefb !important;
+                border-radius: 0.3rem;
+            }
+            li.template button:hover {
+                background-color: #d4edff  !important;
+            }
+        </style>
+        <script>
+            let templateList;
+            let idToCreate;
+
+            function init ( ) {
+                $.ajax({
+                    type: "GET",
+                    url: "/template",
+                    success: function (response) {
+                        templateList = new List('templates', {
+                            valueNames: ['name'],
+                            item: values => {
+                                return `
+                                    <li class="template" onclick="document.getElementById('preview').src = '/preview?id=${values.id}'">
+                                        <h6 class="name">${values.name}</h6>
+                                        <button data-target="accept" class="btn-flat btn-small modal-trigger" onclick="resetModal(); idToCreate = '${values.id}'">
+                                            <i class="material-icons">add</i>
+                                        </button>
+                                    </li>
+                                `;
+                            }
+                        }, response );
+                        document.getElementById('preview').src = '/preview?id='+templateList.get()[0]._values.id;
+                    },
+                    error: console.error
+                });
+            }
+
+            function create () {
+                $.ajax({
+                    type: "POST",
+                    url: "/char",
+                    contentType: "application/json",
+                    data: JSON.stringify( { template: idToCreate } ),
+                    success: function (response) {
+                        document.getElementById('createdId').innerHTML = response.id;
+                        document.getElementById('linkSheet').href = '/sheet?id='+response.id;
+                        document.getElementById('accept-confirm').style.display = 'none';
+                        document.getElementById('accept-created').style.display = 'flex';
+                        document.getElementById('accept-error').style.display = 'none';
+                    },
+                    error: error => {
+                        document.getElementById('accept-confirm').style.display = 'none';
+                        document.getElementById('accept-created').style.display = 'none';
+                        document.getElementById('accept-error').style.display = 'flex';
+                    }
+                });
+            }
+
+            function resetModal () {
+                document.getElementById('accept-confirm').style.display = 'flex';
+                document.getElementById('accept-created').style.display = 'none';
+                document.getElementById('accept-error').style.display = 'none';
+            }
+
+            $(document).ready(function () {
+                init();
+                $('.modal').modal();
+            });
+        </script>
+    </body>
+</html>
