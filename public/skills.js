@@ -69,6 +69,16 @@ function animateDice ( ) {
     }, 3000 );
 }
 
+function clearModifiers ( ) {
+    document.getElementById("mod1").value = "";
+    document.getElementById("mod2").value = "";
+    document.getElementById("mod3").value = "";
+}
+function getModifier ( id ) {
+    if ( !id ) return undefined;
+    if ( id == "mod1" || id == "mod2" || id == "mod3" ) return document.getElementById(id).value | 0;
+    return undefined;
+}
 function replaceStats ( expr ) { 
     let safe_T = 0;
     let result = expr;
@@ -76,7 +86,8 @@ function replaceStats ( expr ) {
     if ( !toReplace[1] ) return result;
     else toReplace = toReplace[1];
     while ( toReplace && safe_T < 100 ) { 
-        result = result.replace(`[${toReplace}]`, getStat(toReplace));
+        const value = getModifier(toReplace) | getStat(toReplace);
+        result = result.replace(`[${toReplace}]`, value);
         toReplace = result.split(/[\[\]]/)[1];
         safe_T++;
     }
@@ -91,6 +102,7 @@ function roll ( skill ) {
     setTimeout(() => { addToLog(`<b>${skill.name}</b>: ${result}`); }, 2000 );
     lastSkill = skill;
     animateDice();
+    clearModifiers();
 }
 
 function reroll ( ) { 
