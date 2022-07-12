@@ -1,0 +1,116 @@
+{
+  "name": "[nome]",
+	"class": "[familia]",
+	"lvl": "1",
+	"hp": {
+		"current": 0,
+		"max": 0
+	},
+	"san": {
+		"current": 0,
+		"max": 0
+	},
+	"stam": {
+		"current": 0,
+		"max": 0
+	},
+	"attributes": [
+		{
+			"id": "res",
+			"value": 0
+		},
+		{
+			"id": "dor",
+			"value": 0
+		},
+		{
+			"id": "fur",
+			"value": 0
+		},
+		{
+			"id": "doe",
+			"value": 0
+		}
+	],
+	"expertises": [
+		{
+			"id": "arma_2_pes",
+			"name": "Arma Pesada Duas Mãos",
+			"value": 0
+		},
+		{
+			"id": "arma_1_pes",
+			"name": "Arma Pesada Uma Mão",
+			"value": 0
+		},
+		{
+			"id": "arma_2",
+			"name": "Arma Duas Mãos",
+			"value": 0
+		},
+		{
+			"id": "arma_1",
+			"name": "Arma Uma Mão",
+			"value": 0
+		},
+		{
+			"id": "fogo_pes",
+			"name": "Arma Fogo Pesada",
+			"value": 0
+		},
+		{
+			"id": "fogo_leve",
+			"name": "Arma Fogo Leve",
+			"value": 0
+		},
+		{
+			"id": "medicina",
+			"name": "Medicina",
+			"value": 0
+		},
+		{
+			"id": "percep",
+			"name": "Percepção",
+			"value": 0
+		},
+		{
+			"id": "historia",
+			"name": "História",
+			"value": 0
+		},
+		{
+			"id": "engana",
+			"name": "Enganação",
+			"value": 0
+		},
+		{
+			"id": "interp",
+			"name": "Interpretação",
+			"value": 0
+		},
+		{
+			"id": "estrat",
+			"name": "Estatégia",
+			"value": 0
+		},
+		{
+			"id": "intim",
+			"name": "Intimidação",
+			"value": 0
+		},
+		{
+			"id": "ervas",
+			"name": "Ervas Naturais",
+			"value": 0
+		},
+		{
+			"id": "manip",
+			"name": "Manipulação",
+			"value": 0
+		}
+	],
+	"pic_url": "https://southernautomotivegroup.com.au/wp-content/uploads/2015/04/generic-placeholder-person.png",
+	"powers": "",
+	"inventory": "",
+	"personality": ""
+}

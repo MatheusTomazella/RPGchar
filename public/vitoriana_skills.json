@@ -1,0 +1,77 @@
+[
+    {
+        "id": "arma_2_pes",
+        "name": "Arma Pesada Duas Mãos",
+        "expr": "(1 + [mod1])d20k1 + [arma_2_pes] + [mod2]"
+    },
+    {
+        "id": "arma_1_pes",
+        "name": "Arma Pesada Uma Mão",
+        "expr": "(1 + [mod1])d20k1 + [arma_1_pes] + [mod2]"
+    },
+    {
+        "id": "arma_2",
+        "name": "Arma Duas Mãos",
+        "expr": "(1 + [mod1])d20k1 + [arma_2] + [mod2]"
+    },
+    {
+        "id": "arma_1",
+        "name": "Arma Uma Mão",
+        "expr": "(1 + [mod1])d20k1 + [arma_1] + [mod2]"
+    },
+    {
+        "id": "fogo_pes",
+        "name": "Arma Fogo Pesada",
+        "expr": "(1 + [mod1])d20k1 + [fogo_pes] + [mod2]"
+    },
+    {
+        "id": "fogo_leve",
+        "name": "Arma Fogo Leve",
+        "expr": "(1 + [mod1])d20k1 + [fogo_leve] + [mod2]"
+    },
+    {
+        "id": "medicina",
+        "name": "Medicina",
+        "expr": "(1 + [mod1])d20k1 + [medicina] + [mod2]"
+    },
+    {
+        "id": "percep",
+        "name": "Percepção",
+        "expr": "(1 + [mod1])d20k1 + [percep] + [mod2]"
+    },
+    {
+        "id": "historia",
+        "name": "História",
+        "expr": "(1 + [mod1])d20k1 + [historia] + [mod2]"
+    },
+    {
+        "id": "engana",
+        "name": "Enganação",
+        "expr": "(1 + [mod1])d20k1 + [engana] + [mod2]"
+    },
+    {
+        "id": "interp",
+        "name": "Interpretação",
+        "expr": "(1 + [mod1])d20k1 + [interp] + [mod2]"
+    },
+    {
+        "id": "estrat",
+        "name": "Estatégia",
+        "expr": "(1 + [mod1])d20k1 + [estrat] + [mod2]"
+    },
+    {
+        "id": "intim",
+        "name": "Intimidação",
+        "expr": "(1 + [mod1])d20k1 + [intim] + [mod2]"
+    },
+    {
+        "id": "ervas",
+        "name": "Ervas Naturais",
+        "expr": "(1 + [mod1])d20k1 + [ervas] + [mod2]"
+    },
+    {
+        "id": "manip",
+        "name": "Manipulação",
+        "expr": "(1 + [mod1])d20k1 + [manip] + [mod2]"
+    }
+]
